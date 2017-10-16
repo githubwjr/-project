@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>workman</title>
+    <!-- // <script src="/jquery-1."></script> -->
+    <!-- // <script src="/Practical_training/1010/workman/jquery-3.2.1.min.js"></script> -->
+    <!-- // <script src="/jquery-1.7.2.min.js"></script> -->
+    <script src="http://www.ddd.com/Practical_training/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+    <input type="text" value="" class="ran">
+    <button id="send" value="kkk">send</button>
+    <div id="msg"></div>
+</body>
+</html>
+<script>
+    // $("#send").click(function(){
+    //     var nei = $('.ran').val();
+    //     $("#msg").append(nei,'<br/>');
+    // })
+
+    $(window).load(function(){
+        var ws = new WebSocket("ws://192.168.206.25:1012");
+        $('#send').click(function(){
+            ws.send($('.ran').val());
+                  
+        })
+
+    ws.onmessage= function(msg) {
+        console.log(msg);
+        $("#msg").append(msg.data,'<br/>');
+
+
+    }
+
+    })
+
+    $(document).ready(function(){
+
+        // alert(3)
+        $("#msg").html('连接成功<br/>');
+    })
+
+</script>
